@@ -92,17 +92,17 @@ int* copiar(int valores[], int inicio, int fin) {
   return copia;
 }
 
-int minimo(int valores[]) {
-  if(inicio == fin)
-    return valores[inicio];
+int minimo(int valores[], int size) {
+  if(size == 1)
+    return valores[0];
 
-  int mitad = (inicio + fin) / 2;
+  int mitad = (size) / 2;
 
-  int* copia1 = copiar(valores, inicio, mitad);
+  int* copia1 = copiar(valores, 0, mitad);
   int* copia2 = copiar(valores, mitad + 1, fin);
 
-  int min1 = minimo(copia1);
-  int min2 = minimo(copia2);
+  int min1 = minimo(copia1, mitad + 1);
+  int min2 = minimo(copia2, fin - mitad)
 
   return min(min1, min2);
 }
@@ -224,7 +224,7 @@ Explanation: [4,-1,2,1] has the largest sum = 6.
 
 # Solución: Máxima Secuencia de un Subarray
 
-```cpp {19-28|1-17}{maxHeight:'400px'}
+```cpp {all|19-28|1-17}{maxHeight:'400px'}
 int maxCrossingSum(int arr[], int left, int mid, int right) {
     int sum = 0;
     int leftSum = INT_MIN;
@@ -234,7 +234,7 @@ int maxCrossingSum(int arr[], int left, int mid, int right) {
     }
 
     sum = 0;
-    int rightSum = INT_MIN;
+    int rightSum = 0;
     for (int i = mid + 1; i <= right; ++i) {
         sum += arr[i];
         if (sum > rightSum) rightSum = sum;
